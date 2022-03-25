@@ -1,1 +1,17 @@
 <button (click)="auth()">Login</button>
+
+<div [formGroup]="form">
+    <h3>ADD MICRO APP</h3>
+    <p>Name: <input formControlName="name" required/></p>
+    <p>Route Path: <input formControlName="path" required/></p>
+    <p>remoteEntry: <input formControlName="remote" required/></p>
+    <p>exposedModule: <input formControlName="exposed" required/></p>
+    <p>ngModule: <input formControlName="ngModule" required/></p>
+    <button (click)="addApp()" [disabled]="form.invalid">Add</button>
+</div>
+
+<div>
+    <li *ngFor="let app of apps">
+        <a [routerLink]="app.route.path">{{app.name}}</a>
+    </li>
+</div>
