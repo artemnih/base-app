@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '@labshare/base-ui-services';
+import { EventKey, EventService } from 'ngx-event-service';
+import { filter } from 'rxjs';
 import { APP_ROUTES } from 'src/app/app-routing.module';
 
 @Component({
@@ -21,8 +23,13 @@ export class DemoComponent implements OnInit {
     ngModule: new FormControl('FlightsModule'),
   })
 
-  constructor(private authService: AuthService, private router: Router,) {
+  constructor(private authService: AuthService, private router: Router, private eventService: EventService) {
     this.onAuthorizationResult = this.authService.onAuthorizationResult();
+
+    const key = new EventKey<string>('demo');
+    this.eventService.get(key).pipe(filter(x => !!x)).subscribe((event: string) => {
+      alert('Message received: ' + event);
+    });
   }
 
   ngOnInit(): void {
@@ -30,6 +37,7 @@ export class DemoComponent implements OnInit {
     this.onAuthorizationResult.subscribe((result: any) => {
       if (result.authorizationState === 'authorized') {
         console.log(`authorized`);
+        console.log(this.authService)
       }
     });
   }
