@@ -1,35 +1,38 @@
-import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-
+import { RouterModule } from '@angular/router';
+import { AuthService, NgxCoreServicesModule } from '@labshare/ngx-core-services';
+import { of } from 'rxjs';
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [AppComponent],
+      providers: [
+        {
+          provide: AuthService,
+          useValue: {
+            configure() {
+              return of();
+            },
+            isAuthenticated() {
+              return true;
+            },
+            getProfile() {
+              return of({});
+            },
+            onAuthorizationResult() {
+              return of('authorized');
+            }
+          }
+        }
       ],
-      declarations: [
-        AppComponent
-      ],
+      imports: [RouterModule.forRoot([])]
     }).compileComponents();
-  });
+  }));
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
+    const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'shell-app'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('shell-app');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('shell-app app is running!');
   });
 });

@@ -1,0 +1,18 @@
+{
+  "production": false,
+  "services": {
+    "auth": {
+      "responseType": "code",
+      "url": "https://a-ci.labshare.org/_api",
+      "clientId": "metadata-ui",
+      "tenant": "metadata",
+      "storage": "local"
+    },
+    "logging": {
+      "url": "https://logging.ci.aws.labshare.org/api/log",
+      "application": "ngx-facility",
+      "environment": "CI",
+      "subTag": "facility"
+    }
+  }
+}
