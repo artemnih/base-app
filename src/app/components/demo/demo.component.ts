@@ -25,7 +25,6 @@ export class DemoComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router, private eventService: EventService) {
     this.onAuthorizationResult = this.authService.onAuthorizationResult();
-
     const key = new EventKey<string>('demo');
     this.eventService.get(key).pipe(filter(x => !!x)).subscribe((event: string) => {
       alert('Message received: ' + event);
@@ -35,7 +34,7 @@ export class DemoComponent implements OnInit {
   ngOnInit(): void {
     this.authService.onAuthCallback();
     this.onAuthorizationResult.subscribe((result: any) => {
-      if (result.authorizationState === 'authorized') {
+      if (result?.authorizationState === 'authorized') {
         console.log(`authorized`);
         console.log(this.authService)
       }
