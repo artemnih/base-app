@@ -20,7 +20,7 @@
     "@angular/platform-browser": "~13.2.0",
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
-    "@labshare/base-ui-services": "^2.2.0",
+    "@labshare/base-ui-services": "^2.4.0",
     "@labshare/ls-font": "^1.11.0",
     "ngx-avatar": "^4.1.0",
     "ngx-event-service": "^1.0.1",
