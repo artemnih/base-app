@@ -12,6 +12,6 @@
 
 <div>
     <li *ngFor="let app of apps">
-        <a [routerLink]="app.route.path">{{app.name}}</a>
+        <a [routerLink]="'/'+app.route.path">{{app.name}}</a>
     </li>
 </div>
